@@ -34,13 +34,13 @@ public class DatabaseContext : DbContext
             new Item
             {
                 Id = 2,
-                Name = "Shield",
+                Name = "Dagger",
                 Weight = 5
             },
             new Item
             {
                 Id = 3,
-                Name = "Helmet",
+                Name = "Shield",
                 Weight = 3
             }
         });
@@ -50,12 +50,12 @@ public class DatabaseContext : DbContext
             new Title
             {
                 Id = 1,
-                Name = "Witcher"
+                Name = "La'Zel"
             },
             new Title
             {
                 Id = 2,
-                Name = "Witcher 2"
+                Name = "Astorion"
             }
         });
 
@@ -64,16 +64,16 @@ public class DatabaseContext : DbContext
             new Character
             {
                 Id = 1,
-                FirstName = "Witcher",
-                LastName = "Idk",
+                FirstName = "Astorion",
+                LastName = "Dasd",
                 CurrentWeight = 23,
                 MaxWeight = 120
             },
             new Character
             {
                 Id = 2,
-                FirstName = "Ciri",
-                LastName = "smh",
+                FirstName = "La",
+                LastName = "'zel",
                 CurrentWeight = 8,
                 MaxWeight = 60
             }
@@ -85,25 +85,25 @@ public class DatabaseContext : DbContext
             {
                 CharacterId = 1,
                 TitleId = 1,
-                AcquiredAt = DateTime.Parse("01-01-1990")
+                AcquiredAt = DateTime.Parse("01-01-2002")
             },
             new CharacterTitle
             {
                 CharacterId = 2,
                 TitleId = 1,
-                AcquiredAt = DateTime.Parse("01-01-1990")
+                AcquiredAt = DateTime.Parse("01-01-2004")
             },
             new CharacterTitle
             {
                 CharacterId = 1,
                 TitleId = 2,
-                AcquiredAt = DateTime.Parse("01-01-1990")
+                AcquiredAt = DateTime.Parse("01-01-2018")
             },
             new CharacterTitle
             {
                 CharacterId = 2,
                 TitleId = 2,
-                AcquiredAt = DateTime.Parse("01-01-1990")
+                AcquiredAt = DateTime.Parse("01-01-2020")
             }
         });
 

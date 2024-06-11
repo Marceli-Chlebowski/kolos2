@@ -94,9 +94,6 @@ public class DbService : IDbService
         
         var characterWeight = await _context.Characters.Where(c => c.Id.Equals(id))
             .Select(c => c.CurrentWeight).FirstOrDefaultAsync();
-
-        //var character _context.Characters.Where(c => c.Id.Equals(id))
-            //.Select(c => c.CurrentWeight = itemsWeight + characterWeight);
     }
 
     public async Task<int> CalculateItemsWeight(List<int> items)
