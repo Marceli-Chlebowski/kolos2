@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebApplication1.Controlers;
 using WebApplication1.Data;
 using WebApplication1.DTOs;
 using WebApplication1.Models;
@@ -17,20 +16,20 @@ public class DbService : IDbService
 
     public async Task<bool> DoesCharacterExist(int id)
     {
-        var result = await _context.Characters.AnyAsync(c => c.Id.Equals(id));
-
-        return result;
+        return await _context.Characters.AnyAsync(c => c.Id == id);
     }
 
     public async Task<IEnumerable<CharacterInfoDto>> GetCharacterInfo(int id)
     {
-        var character = await _context.Characters.Where(c => c.Id.Equals(id))
+        var characters = await _context.Characters
+            .Where(c => c.Id == id)
             .Include(c => c.Backpacks)
-            .ThenInclude(b => b.Item)
+                .ThenInclude(b => b.Item)
             .Include(c => c.CharacterTitles)
-            .ThenInclude(ct => ct.Title).ToListAsync();
+                .ThenInclude(ct => ct.Title)
+            .ToListAsync();
 
-        var result = character.Select(c => new CharacterInfoDto
+        return characters.Select(c => new CharacterInfoDto
         {
             FirstName = c.FirstName,
             LastName = c.LastName,
@@ -48,64 +47,59 @@ public class DbService : IDbService
                 AcquiredAt = t.AcquiredAt
             }).ToList()
         });
-
-        return result;
     }
 
     public async Task<bool> DoesItemExist(int id)
     {
-        var result = await _context.Items.AnyAsync(c => c.Id.Equals(id));
-
-        return result;
+        return await _context.Items.AnyAsync(i => i.Id == id);
     }
 
-    public async Task<bool> CanCharacterCarryMore(int id, List<int> items)
+    public async Task<bool> CanCharacterCarryMore(int id, List<int> itemIds)
     {
-        var characterWeight = await _context.Characters.Where(c => c.Id.Equals(id))
-            .Select(c => c.CurrentWeight).FirstOrDefaultAsync();
-        
-        var characterMaxWeight = await _context.Characters.Where(c => c.Id.Equals(id))
-            .Select(c => c.MaxWeight).FirstOrDefaultAsync();
+        var character = await _context.Characters
+            .Where(c => c.Id == id)
+            .Select(c => new { c.CurrentWeight, c.MaxWeight })
+            .FirstOrDefaultAsync();
 
-        var itemsWeight = await CalculateItemsWeight(items);
-        
-        return itemsWeight + characterWeight <= characterMaxWeight;
-    }
-
-    public async Task AddItemsToCharacter(int id, List<int> items)
-    {
-        foreach (var item in items)
+        if (character == null)
         {
-            var backpack = new Backpack
-            {
-                CharacterId = id,
-                ItemId = id
-            };
-
-            await _context.Backpacks.AddAsync(backpack);
+            return false;
         }
 
+        var itemsWeight = await CalculateItemsWeight(itemIds);
+
+        return itemsWeight + character.CurrentWeight <= character.MaxWeight;
+    }
+
+    public async Task AddItemsToCharacter(int characterId, List<int> itemIds)
+    {
+        var backpacks = itemIds.Select(itemId => new Backpack
+        {
+            CharacterId = characterId,
+            ItemId = itemId
+        });
+
+        await _context.Backpacks.AddRangeAsync(backpacks);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateCharactersWeight(int id, List<int> items)
+    public async Task UpdateCharactersWeight(int id, List<int> itemIds)
     {
-        var itemsWeight = await CalculateItemsWeight(items);
-        
-        var characterWeight = await _context.Characters.Where(c => c.Id.Equals(id))
-            .Select(c => c.CurrentWeight).FirstOrDefaultAsync();
+        var itemsWeight = await CalculateItemsWeight(itemIds);
+
+        var character = await _context.Characters.FindAsync(id);
+
+        if (character != null)
+        {
+            character.CurrentWeight += itemsWeight;
+            await _context.SaveChangesAsync();
+        }
     }
 
-    public async Task<int> CalculateItemsWeight(List<int> items)
+    private async Task<int> CalculateItemsWeight(List<int> itemIds)
     {
-        int itemsWeight = 0;
-
-        foreach (var item in items)
-        {
-            itemsWeight += await _context.Items.Where(i => i.Id.Equals(item))
-                .Select(i => i.Weight).FirstOrDefaultAsync();
-        }
-
-        return itemsWeight;
+        return await _context.Items
+            .Where(i => itemIds.Contains(i.Id))
+            .SumAsync(i => i.Weight);
     }
 }
