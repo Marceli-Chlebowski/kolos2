@@ -111,8 +111,8 @@ namespace WebApplication1.Migrations
                 columns: new[] { "Id", "CurrentWeight", "FirstName", "LastName", "MaxWeight" },
                 values: new object[,]
                 {
-                    { 1, 23, "Witcher", "Idk", 120 },
-                    { 2, 8, "Ciri", "smh", 60 }
+                    { 1, 23, "Astorion", "Dasd", 120 },
+                    { 2, 8, "La", "'zel", 60 }
                 });
 
             migrationBuilder.InsertData(
@@ -121,8 +121,8 @@ namespace WebApplication1.Migrations
                 values: new object[,]
                 {
                     { 1, "Sword", 15 },
-                    { 2, "Shield", 5 },
-                    { 3, "Helmet", 3 }
+                    { 2, "Dagger", 5 },
+                    { 3, "Shield", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -130,8 +130,8 @@ namespace WebApplication1.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Witcher" },
-                    { 2, "Witcher 2" }
+                    { 1, "La'Zel" },
+                    { 2, "Astorion" }
                 });
 
             migrationBuilder.InsertData(
@@ -151,10 +151,10 @@ namespace WebApplication1.Migrations
                 columns: new[] { "CharacterId", "TitleId", "AcquiredAt" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 1, 2, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 2, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, new DateTime(2002, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, 2, new DateTime(2018, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 1, new DateTime(2004, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 2, new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.CreateIndex(

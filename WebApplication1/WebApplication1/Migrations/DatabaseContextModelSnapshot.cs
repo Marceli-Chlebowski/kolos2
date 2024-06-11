@@ -105,16 +105,16 @@ namespace WebApplication1.Migrations
                         {
                             Id = 1,
                             CurrentWeight = 23,
-                            FirstName = "Witcher",
-                            LastName = "Idk",
+                            FirstName = "Astorion",
+                            LastName = "Dasd",
                             MaxWeight = 120
                         },
                         new
                         {
                             Id = 2,
                             CurrentWeight = 8,
-                            FirstName = "Ciri",
-                            LastName = "smh",
+                            FirstName = "La",
+                            LastName = "'zel",
                             MaxWeight = 60
                         });
                 });
@@ -141,25 +141,25 @@ namespace WebApplication1.Migrations
                         {
                             CharacterId = 1,
                             TitleId = 1,
-                            AcquiredAt = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            AcquiredAt = new DateTime(2002, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             CharacterId = 2,
                             TitleId = 1,
-                            AcquiredAt = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            AcquiredAt = new DateTime(2004, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             CharacterId = 1,
                             TitleId = 2,
-                            AcquiredAt = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            AcquiredAt = new DateTime(2018, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             CharacterId = 2,
                             TitleId = 2,
-                            AcquiredAt = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            AcquiredAt = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -193,13 +193,13 @@ namespace WebApplication1.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Shield",
+                            Name = "Dagger",
                             Weight = 5
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Helmet",
+                            Name = "Shield",
                             Weight = 3
                         });
                 });
@@ -225,12 +225,12 @@ namespace WebApplication1.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Witcher"
+                            Name = "La'Zel"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Witcher 2"
+                            Name = "Astorion"
                         });
                 });
 
